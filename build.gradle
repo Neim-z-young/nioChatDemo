@@ -1,0 +1,37 @@
+plugins {
+    id 'java'
+    //id 'application'
+}
+
+group 'com.oyoungy'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+def CreatDir = {
+    path -> 
+        File dir = new File(path)
+        if(!dir.exists()){
+            dir.mkdir()
+        }
+}
+
+
+task CreatPack {
+    def paths = ["src/main/java/com.oyoungy", "src/test/java/com.oyoungy"]
+    doFirst{
+        paths.forEach(CreatDir)
+    }
+}
